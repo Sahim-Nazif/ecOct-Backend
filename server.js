@@ -2,11 +2,20 @@ const express=require('express');
 const app=express()
 require ('dotenv').config()
 const morgan=require('morgan')
+const mongoose=require('mongoose')
 
-app.get('/', (req, res)=>{
 
-    res.send('This is backend')
-})
+//db connection
+mongoose
+    .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+    .then(() => console.log('Mongo-DB Connected...'))
+    .catch(err => console.log(err));
+
+
 
 //middlewares
 if (process.env.NODE_ENV==='development') {
@@ -18,7 +27,8 @@ if (process.env.NODE_ENV==='development') {
     console.log('the app is in production phase ')
 }
 
-
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 const port=process.env.PORT
 app.listen(port, ()=>{
