@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-const reviewSchema=mongoose.Schema({
+const reviewSchema=new mongoose.Schema({
 
     userid:{
         type:mongoose.Schema.Types.ObjectID
@@ -20,7 +20,7 @@ const reviewSchema=mongoose.Schema({
 }, { timestamps: true })
 
 
-const productSchema=mongoose.Schema({
+const productSchema=new mongoose.Schema({
 
     name:{
         type:String,
@@ -55,6 +55,5 @@ const productSchema=mongoose.Schema({
 }, { timestamps: true })
 
 
-const Product=mongoose.model('products', productSchema)
+module.exports=mongoose.model('Product', productSchema)
 
-module.exports=Product
