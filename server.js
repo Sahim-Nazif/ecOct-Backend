@@ -4,7 +4,7 @@ require ('dotenv').config()
 const morgan=require('morgan')
 const mongoose=require('mongoose')
 const productRoute=require('./routes/productRoute')
-
+const bodyParser=require('body-parser')
 //db connection
 mongoose
     .connect(process.env.MONGO_URI, {
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV==='development') {
 
     console.log('the app is in production phase ')
 }
-
+app.use(bodyParser.json())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 

@@ -27,8 +27,24 @@ const get_all_products=async(req, res)=>{
 
 }
 
+const get_product_byId=(req, res)=>{
+
+  
+    Product.findById(req.params.id)
+     
+        .exec((err, product) => {
+            if (err || !product) {
+                return res.status(400).json({ error: 'Could not find the product' })
+            }
+            res.json(product)
+        })
+    }
+
+ 
+
 module.exports={
 
     create_product,
-    get_all_products
+    get_all_products,
+    get_product_byId
 }
