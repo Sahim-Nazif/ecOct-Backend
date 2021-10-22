@@ -29,18 +29,15 @@ const get_all_products=async(req, res)=>{
 
 const get_product_byId=(req, res)=>{
 
+    Product.find({_id:req.body.productId},(error, product)=>{
+      
+        if (error || !product) {
+            return res.status(400).json({ error: 'Could not find the product' })
+        }
+        res.json(product)
+    })
   
-    Product.findById(req.params.id)
-     
-        .exec((err, product) => {
-            if (err || !product) {
-                return res.status(400).json({ error: 'Could not find the product' })
-            }
-            res.json(product)
-        })
-    }
-
- 
+}
 
 module.exports={
 
