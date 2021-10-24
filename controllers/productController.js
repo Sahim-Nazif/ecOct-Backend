@@ -34,7 +34,7 @@ const get_product_byId=(req, res)=>{
         if (error || !product) {
             return res.status(400).json({ error: 'Could not find the product' })
         }
-        res.json(product)
+        res.json(product[0])
     })
   
 }
