@@ -4,7 +4,10 @@ require ('dotenv').config()
 const morgan=require('morgan')
 const mongoose=require('mongoose')
 const productRoute=require('./routes/productRoute')
+const userRoute=require('./routes/userRoute')
 const bodyParser=require('body-parser')
+
+
 //db connection
 mongoose
     .connect(process.env.MONGO_URI, {
@@ -30,6 +33,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.use('/api', productRoute)
+app.use('/api', userRoute)
 
 const port=process.env.PORT
 app.listen(port, ()=>{
