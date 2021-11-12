@@ -6,7 +6,7 @@ const register_user=async(req, res)=>{
     const emailExits=await User.findOne({email})
     
     if (emailExits) {
-        res.status(400).send('Looks like this user already exists!')
+        res.status(400).json({message:'Looks like this user already exists!'})
     } 
     else {
         const user= new User({
@@ -16,11 +16,11 @@ const register_user=async(req, res)=>{
         })
         user.save(error=>{
 
-            if (!error ) {
-                 res.send('Hey Congrats! You all set')
+            if (error ) {
+                 return res.status(400).json({message:'Oh no ! Somethign went wrong,please try again'})
             } else {
     
-                res.send('Oh no ! Somethign went wrong,please try again')
+                res.send('Hey Congrats ! You registeration was successful.')
             }
     
         })
