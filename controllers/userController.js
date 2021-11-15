@@ -29,6 +29,22 @@ const register_user=async(req, res)=>{
 
 }
 
+const login_user=(req, res)=>{
+
+        User.find(
+                {email:req.body.email, 
+                password:req.body.password}
+                ,(err,user)=>{
+                    if (user.length>0) {
+                        res.status(200).json({message:'Login Successful'})
+                    }else {
+
+                        res.status(400).json({message:'Email or password entered is not recognized!'})
+                    }
+                })
+}
+
 module.exports = {
-    register_user
+    register_user,
+    login_user
 }
