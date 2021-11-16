@@ -36,7 +36,13 @@ const login_user=(req, res)=>{
                 password:req.body.password}
                 ,(err,user)=>{
                     if (user.length>0) {
-                        res.status(200).json({message:'Login Successful'})
+                        const loggedUser={
+                            name:user[0].name,
+                            _id:user[0]._id,
+                            email:user[0].email
+                        }
+             
+                        res.status(200).json({user})
                     }else {
 
                         res.status(400).json({message:'Email or password entered is not recognized!'})
