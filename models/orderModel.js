@@ -5,16 +5,16 @@ const orderSchema=new mongoose.Schema({
 
 
     userid:{
-        type:String,
-        required:true
+        type:String
+     
     },
     name:{
-        type:String,
-        required:true
+        type:String
+      
     },
     email:{
-        type:String,
-        required:true
+        type:String
+        
     },
     orderItems:[{
         name:{type:String, required:true},
@@ -44,3 +44,4 @@ const orderSchema=new mongoose.Schema({
 }, {timestamps:true})
 
 module.exports=mongoose.model('Order', orderSchema)
+

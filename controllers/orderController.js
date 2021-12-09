@@ -1,36 +1,60 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 const uuidv4 = require('uuid').v4
+const Order=require('../models/orderModel')
+
+const charges_stripe = async(req, res) => {
 
 
-const charges_stripe = (req, res) => {
+    const { token, currentUser, cartItems, cartTotal } = req.body;
+ 
+        const customer=await stripe.customers.create({
+        name: token.name,
+        email: token.email,
+        source: token.id
+    })
+    const payment=await stripe.charges.create({
+        amount: cartTotal * 100,
+        currency: 'cad',
+        customer: customer.id,
+        receipt_email: token.email
+        
 
+    }, {
+        idempotencyKey: uuidv4()
+    
+    })
 
-    const { token, cartTotal } = req.body;
-    try {
-        stripe.customers
-            .create({
-                name: token.name,
-                email: token.email,
-                source: token.id
-            })
-            .then(customer =>
+    if (payment) {
+      
+        const order= new Order({
+            userid:currentUser._id,
+            name:currentUser.name,
+            email:currentUser.email,
+            orderItems:cartItems,
+            shippingAddress:{
+                address:token.card.address_line1,
+                city:token.card.address_city,
+                country:token.card.address_country,
+                postalCode:token.card.address_zip
+            },
+            orderAmount:cartTotal,
+            transactionId:token.id,
+            isDelivered:false
+           
+        })
 
-                stripe.charges.create({
-
-                    amount: cartTotal * 100,
-                    currency: 'cad',
-                    customer: customer.id,
-                    receipt_email: token.email
-
-                }, {
-                    idempotencyKey: uuidv4()
-                })
-            )
-            .then(() => res.send('Payment successful'))
-            .catch(err => console.log(err));
-    } catch (err) {
-        return res.status(400).json({message:'Payment failed'})
+        order.save((error, data)=>{
+            if (error ) {
+               
+                return res.status(400).json({message:'Sorry your order was not placed'})
+                
+           } 
+           res.json(data)
+        })
+    } else {
+        return res.status(400).json({message:'Payment was not successful'})
     }
+
 }
 
 

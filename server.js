@@ -33,9 +33,11 @@ app.use(bodyParser.json())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+
+app.use('/api', orderRoute)
 app.use('/api', productRoute)
 app.use('/api', userRoute)
-app.use('/api', orderRoute)
+
 
 const port=process.env.PORT
 app.listen(port, ()=>{
