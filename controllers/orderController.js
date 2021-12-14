@@ -57,8 +57,21 @@ const charges_stripe = async(req, res) => {
 
 }
 
+const getOrdersByUserId=(req, res)=>{
 
+    const userid=req.body.userid
+
+    Order.find({userid:userid}, (err, data)=>{
+        if (err) {
+            return res.status(400).json({message:'Something went wrong'})
+        } else {
+            res.json({data})
+        }
+    })
+    
+}
 module.exports = {
 
-    charges_stripe
+    charges_stripe,
+    getOrdersByUserId
 }
