@@ -65,7 +65,7 @@ const getOrdersByUserId=(req, res)=>{
         if (err) {
             return res.status(400).json({message:'Something went wrong'})
         } else {
-            res.json({data})
+            res.json(data)
         }
     })
     
