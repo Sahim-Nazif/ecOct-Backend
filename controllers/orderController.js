@@ -70,8 +70,22 @@ const getOrdersByUserId=(req, res)=>{
     })
     
 }
+
+const getOrderById=(req, res)=>{
+
+    const orderid=req.body.orderid
+
+    Order.find({orderid:orderid}, (err, data)=>{
+        if (err){
+            return res.status(400).json({message:'Something went wrong'})
+        }else {
+            res.json(data)
+        }
+    })
+}
 module.exports = {
 
     charges_stripe,
-    getOrdersByUserId
+    getOrdersByUserId,
+    getOrderById
 }
