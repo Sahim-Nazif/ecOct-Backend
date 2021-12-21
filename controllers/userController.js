@@ -42,7 +42,7 @@ const login_user=(req, res)=>{
                             email:user[0].email
                         }
              
-                        res.status(200).json({user})
+                        res.status(200).json(user)
                     }else {
 
                         res.status(400).json({message:'Email or password entered is not recognized!'})

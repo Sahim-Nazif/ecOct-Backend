@@ -71,17 +71,15 @@ const getOrdersByUserId=(req, res)=>{
     
 }
 
-const getOrderById=(req, res)=>{
+const getOrderById=async (req, res)=>{
 
-    const orderid=req.body.orderid
-
-    Order.find({orderid:orderid}, (err, data)=>{
-        if (err){
-            return res.status(400).json({message:'Something went wrong'})
-        }else {
-            res.json(data)
-        }
-    })
+   const order=await Order.findById(req.params.id)
+   
+   if (order) {
+       res.json(order)
+   }else {
+    return res.status(400).json({message:'Something went wrong'})
+   }
 }
 module.exports = {
 

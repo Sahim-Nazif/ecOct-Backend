@@ -5,6 +5,6 @@ const {charges_stripe, getOrdersByUserId, getOrderById}=require('../controllers/
 
 router.post('/orders/placeOrder', charges_stripe)
 router.get('/orders/getordersbyUserid', getOrdersByUserId)
-router.get('orders/getorderbyid', getOrderById)
+router.get('/orders/getorderbyid/:id', getOrderById)
 
 module.exports=router;
