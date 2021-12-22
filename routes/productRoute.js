@@ -3,12 +3,13 @@ const router=express.Router();
 
 const {create_product, 
         get_product_byId,
-         get_all_products}=require('../controllers/productController')
+         get_all_products,give_review}=require('../controllers/productController')
 
 
 
 router.post('/product/create', create_product)
 router.get('/product/all', get_all_products)
 router.post('/product/byId', get_product_byId)
+router.post('/product/addreview', get_product_byId)
 
 module.exports=router
