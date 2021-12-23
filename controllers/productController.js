@@ -4,7 +4,7 @@ const Product=require('../models/productModel')
 const create_product=(req, res)=>{
 
     const product= new Product (req.body)
-    console.log(product)
+ 
     product.save((error, data)=>{
 
         if (error) {
@@ -54,14 +54,17 @@ const give_review=async(req, res)=>{
     product.reviews.push(reviewModel)
     product.save(err=>{
         if (err) {
-            return res.status(400).json({ error: 'Something went wrong' })
-        } else {
-            res.status(200).json({message:'Thanks for the review'})
+       
+            res.status(400).json({message:'Something went wrong'})
+            
+        }else {
+          
+            res.status(200).json({message:'Thanks for the feedback'})
         }
     })
 
-
 }
+
 module.exports={
 
     create_product,

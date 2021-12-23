@@ -6,16 +6,13 @@ const reviewSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectID
     },
     name:{
-        type:String,
-        required:true
+        type:String
     },
     comment:{
-        type:String,
-        required:true
+        type:String
     },
     rating:{
-        type:Number,
-        required:true
+        type:Number
     }
 }, { timestamps: true })
 
@@ -23,33 +20,26 @@ const reviewSchema=new mongoose.Schema({
 const productSchema=new mongoose.Schema({
 
     name:{
-        type:String,
-        required:true
+        type:String
     },
     image:{
-        type:String,
-        required:true
+        type:String
     },
     category:{
-        type:String,
-        required:true
+        type:String
     },
     description:{
-        type:String,
-        required:true
+        type:String
     },
     price:{
-        type:Number,
-        required:true
+        type:Number
     },
     countInStock:{
 
-        type:Number,
-        required:true
+        type:Number
     },
     rating:{
-        type:Number,
-        required:true
+        type:Number
     },
     reviews:[reviewSchema]
 }, { timestamps: true })

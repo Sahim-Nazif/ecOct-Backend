@@ -10,6 +10,6 @@ const {create_product,
 router.post('/product/create', create_product)
 router.get('/product/all', get_all_products)
 router.post('/product/byId', get_product_byId)
-router.post('/product/addreview', get_product_byId)
+router.post('/product/addreview', give_review)
 
 module.exports=router
