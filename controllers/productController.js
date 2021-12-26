@@ -51,10 +51,15 @@ const give_review=async(req, res)=>{
         rating:review.rating,
         comment:review.comment
     }
+    
     product.reviews.push(reviewModel)
+    let rating=product.reviews.reduce((acc, x)=>acc + x.rating,0)/product.reviews.length
+
+    product.rating=rating
+  
     product.save(err=>{
         if (err) {
-       
+            console.log(err)
             res.status(400).json({message:'Something went wrong'})
             
         }else {
