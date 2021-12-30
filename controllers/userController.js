@@ -50,7 +50,24 @@ const login_user=(req, res)=>{
                 })
 }
 
+const update_user=(req, res) =>{
+
+    const {userid, updatedUser}=req.body;
+    User.findByIdAndUpdate({_id:userid},{
+        name:updatedUser.name,
+        email:updatedUser.email,
+        password:updatedUser.password
+    }, (err)=>{
+        if (err) {
+            return res.status.json({message:'Something went wrong'})
+        }else {
+            res.status(200).json({message:'Your profile was updated successfuly'})
+        }
+    })
+}
+
 module.exports = {
     register_user,
-    login_user
+    login_user,
+    update_user
 }
